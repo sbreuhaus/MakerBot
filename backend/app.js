@@ -17,9 +17,10 @@ app.get('/', function(request, response){
 app.post('/', function(request, response){
   console.log("request.body", request.body);
   var newName = request.body;
-  fs.readFile('./names.json', function(err, data){
-    console.log('data', data);
+  fs.readFile('./names.json', 'utf8', function(err, data){
+    console.log('data should be here', data);
     var parsed = JSON.parse(data);
+    console.log("this is parsed", parsed);
     parsed.push(newName);
     fs.writeFile('./names.json', JSON.stringify(parsed), function(err){
       response.json({success: true})
